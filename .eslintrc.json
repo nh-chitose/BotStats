@@ -5,8 +5,7 @@
    },
    "extends": [
        "eslint:recommended",
-       "plugin:@typescript-eslint/recommended",
-       "plugin:eslint-comments/recommended"
+       "plugin:@typescript-eslint/recommended"
    ],
    "overrides": [
    ],
@@ -56,6 +55,15 @@
              }
            ]
          }
-       ]
+       ],
+       "quotes": "off",
+       "@typescript-eslint/quotes": ["error", "double"],
+       "camelcase": ["error", { "properties": "never" }],
+       "semi": ["error", "always"],
+       "semi-spacing": ["error", {"after": true, "before": false}],
+       "semi-style": ["error", "last"],
+       "no-extra-semi": "error",
+       "no-unexpected-multiline": "error",
+       "no-unreachable": "error"
    }
 }
