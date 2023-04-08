@@ -1,0 +1,29 @@
+{
+  "name": "botstats",
+  "version": "1.0.0",
+  "description": "A Discord bot which shows the status of another music and TTS bots.",
+  "private": true,
+  "scripts": {
+    "build": "rimraf dist/ && tsc",
+    "onlystart": "node ./dist",
+    "start": "npm run build && npm run onlystart",
+    "lint": "tsc && eslint ./src/**/*.ts"
+  },
+  "keywords": [],
+  "author": "nh-chitose",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.9.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "^8.37.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "rimraf": "^4.4.1",
+    "typescript": "^5.0.3"
+  }
+}

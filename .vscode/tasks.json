@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "type": "shell",
+      "group": "build",
+      "command": [
+        "npx tsc --incremental -p tsconfig.build.json"
+      ],
+      "label": "Transpile TypeScript"
+    },
+    {
+      "type": "shell",
+      "group": "none",
+      "label": "Install dependencies",
+      "command": [
+        "npm install"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "group": "none",
+      "label": "Clean up compiled files",
+      "script": "cleanup",
+      "problemMatcher": []
+    }
+  ]
+}
