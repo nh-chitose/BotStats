@@ -25,9 +25,12 @@ client.on("ready", () => {
 });
 
 client.on("voiceStateUpdate", async (oldState, newState) => {
+    if (!newState.member) return;
+    if (!oldState.member) return;
     console.log(newState.member.displayName);
     let flag = 0;
-    if (newState.guild.members.me.permissions.has("ManageNicknames") && newState.guild.members.me.permissions.has("ManageChannels")) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    if (newState.guild.members.me!.permissions.has("ManageNicknames") && newState.guild.members.me!.permissions.has("ManageChannels")) {
         console.log("Permission: OK");
         flag++;
     } else {
@@ -35,14 +38,14 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     }
 
     if (flag == 1) {
-        if (oldState.channelId === null && newState.channelId !== null) {
+        if ( oldState.channelId == null && newState.channelId != null ) {
             console.log("入室検知");
             if (newState.member.user.bot) {
                 let newDisplayName = newState.member.displayName.replace("🈳", "🈵");
                 newDisplayName =newDisplayName.replace(stopButton,"▶");
                 try {
                     await newState.member.setNickname(newDisplayName);
-                    if (newState.channel.userLimit == 2) {
+                    if (newState.channel?.userLimit == 2) {
                         newState.channel.setUserLimit(3);
                     }
                 } catch (e) {
@@ -51,16 +54,15 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
             }
         }
 
-        else if (oldState.channelId !== null && newState.channelId === null) {
+        else if ( oldState.channelId !== null && newState.channelId == null ) {
             console.log("退室検知");
             if (oldState.member.user.bot && ( oldState.member.displayName.includes("🈵") || oldState.member.displayName.includes("▶"))) {
                 try {
                     let newDisplayName = oldState.member.displayName.replace("🈵", "🈳");
                     newDisplayName = newDisplayName.replace("▶",stopButton);
                     await newState.member.setNickname(newDisplayName);
-                    console.log(oldState.channel.userLimit);
-                    console.log(oldState.channel.name.indexOf("3"));
-                    if (oldState.channel.userLimit == 3 && oldState.channel.name.indexOf("3") == -1) {
+
+                    if (oldState.channel?.userLimit == 3 && oldState.channel.name.indexOf("3") == -1) {
                         oldState.channel.setUserLimit(2);
                     }
                 } catch (e) {
@@ -73,17 +75,16 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
             console.log("Voice State Updated.");
             if (newState.member.user.bot) {
                 try {
-                    if (newState.channel.userLimit == 2) {
+                    if (newState.channel?.userLimit == 2) {
                         newState.channel.setUserLimit(3);
                     }
-                    else if (oldState.channel.userLimit == 3 && oldState.channel.name.indexOf("3") == -1 && oldState.channel.name.indexOf("３") == -1) {
+                    else if (oldState.channel?.userLimit == 3 && oldState.channel.name.indexOf("3") == -1 && oldState.channel.name.indexOf("３") == -1) {
                         oldState.channel.setUserLimit(2);
                     }
                 } catch (e) {
                     console.log(e);
                 }
             }
-
         }
     }
 });
