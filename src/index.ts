@@ -71,7 +71,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
           const newDisplayName = oldState.member.displayName.replace("🈵", "🈳").replace("▶", stopButton);
           await newState.member.setNickname(newDisplayName);
 
-          if(oldState.channel.userLimit === 3 && (!oldState.channel.name.includes("3") || !oldState.channel.name.includes("３"))){
+          if(oldState.channel.userLimit === 3 && !oldState.channel.name.includes("3") && !oldState.channel.name.includes("３")){
             await oldState.channel.setUserLimit(2);
           }
         } catch(e){
@@ -87,7 +87,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if(newState.channel.userLimit === 2){
           await newState.channel.setUserLimit(3);
         }
-        if(oldState.channel.userLimit === 3 && (!oldState.channel.name.includes("3") || !oldState.channel.name.includes("３"))){
+        if(oldState.channel.userLimit === 3 && !oldState.channel.name.includes("3") && !oldState.channel.name.includes("３")){
           await oldState.channel.setUserLimit(2);
         }
       } catch(e){
