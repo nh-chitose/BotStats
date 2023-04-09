@@ -132,8 +132,8 @@
       ],
       "pathGroups": [
         {
-          "pattern": "{eris,@mtripg6666tdr/**}",
-          "group": "builtin",
+          "pattern": "@/components/common",
+          "group": "internal",
           "position": "before"
         }
       ],
@@ -153,7 +153,6 @@
     "node/no-missing-import": "off",
     "node/no-missing-require": "off",
     "node/shebang": "error",
-    "license-header/header": ["warn", "./util/license.js"],
     "named-import-spacing/named-import-spacing": "warn",
 
     // eslint rules
