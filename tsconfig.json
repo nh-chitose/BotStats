@@ -17,7 +17,6 @@
     "lib": ["ES2021"],
     "moduleResolution": "node",
     "strictBindCallApply": true,
-    "resolveJsonModule": true,
   },
   "include": [
     "src/**/*.ts"
