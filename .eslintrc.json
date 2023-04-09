@@ -13,7 +13,6 @@
     "@typescript-eslint",
     "import",
     "node",
-    "license-header",
     "named-import-spacing"
   ],
   "env": {
@@ -318,12 +317,5 @@
     "no-extra-semi": "off",
     "indent": "off"
   },
-  "overrides": [
-    {
-      "files": ["./util/exampleDbServer/node/src/**/*.ts"],
-      "parserOptions": {
-        "project": "./util/exampleDbServer/node/tsconfig.json"
-      }
-    }
-  ]
+  "overrides": []
 }
