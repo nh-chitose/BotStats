@@ -4,7 +4,6 @@ import "dotenv/config";
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildVoiceStates,
   ],
   ws: { properties: { browser: "Discord iOS" } },
@@ -25,7 +24,7 @@ client.on("ready", () => {
 client.on("voiceStateUpdate", async (oldState, newState) => {
   console.log(newState.member.displayName);
 
-  // flags
+  // flags to changeNick
   let flag = 0;
   // have permission?
   if(newState.guild.members.me.permissions.has(PermissionFlagsBits.ManageNicknames) && newState.guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)){
@@ -88,7 +87,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if(newState.channel.userLimit === 2){
           await newState.channel.setUserLimit(3);
         }
-        else if(oldState.channel.userLimit === 3 && (!oldState.channel.name.includes("3") || !oldState.channel.name.includes("３"))){
+        if(oldState.channel.userLimit === 3 && (!oldState.channel.name.includes("3") || !oldState.channel.name.includes("３"))){
           await oldState.channel.setUserLimit(2);
         }
       } catch(e){
