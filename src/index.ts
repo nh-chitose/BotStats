@@ -53,8 +53,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     // When bot enters voice channel
     if(oldState.channelId === null && newState.channelId !== null){
       console.log("Detected bot entry to voice channel.");
-      let newDisplayName = newState.member.displayName.replace("🈳", "🈵");
-      newDisplayName = newDisplayName.replace(stopButton, "▶");
+      const newDisplayName = newState.member.displayName.replace("🈳", "🈵").replace(stopButton, "▶");
       try{
         await newState.member.setNickname(newDisplayName);
         if(newState.channel.userLimit === 2){
@@ -70,8 +69,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
       console.log("Detected bot leave from voice channel.");
       if(oldState.member.displayName.includes("🈵") || oldState.member.displayName.includes("▶")){
         try{
-          let newDisplayName = oldState.member.displayName.replace("🈵", "🈳");
-          newDisplayName = newDisplayName.replace("▶", stopButton);
+          const newDisplayName = oldState.member.displayName.replace("🈵", "🈳").replace("▶", stopButton);
           await newState.member.setNickname(newDisplayName);
 
           if(oldState.channel.userLimit === 3 && !oldState.channel.name.includes("3")){
