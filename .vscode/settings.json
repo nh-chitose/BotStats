@@ -22,5 +22,6 @@
     "source.addMissingImports",
     "source.fixAll.eslint",
   ],
+  "editor.tabSize": 2,
 }
 
