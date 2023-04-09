@@ -64,7 +64,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
       }
     }
 
-    // When bot leaves voice channel.
+    // When bot leaves voice channel
     else if(oldState.channelId !== null && newState.channelId === null){
       console.log("Detected bot leave from voice channel.");
       if(oldState.member.displayName.includes("🈵") || oldState.member.displayName.includes("▶")){
