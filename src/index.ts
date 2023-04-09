@@ -19,9 +19,7 @@ client.once("ready", () => {
 });
 
 client.on("ready", () => {
-  if(client.user){
-    client.user.setActivity("on " + client.guilds.cache.size + " servers", { type: ActivityType.Playing });
-  }
+  client.user.setActivity("on " + client.guilds.cache.size + " servers", { type: ActivityType.Playing });
 });
 
 client.on("voiceStateUpdate", async (oldState, newState) => {
