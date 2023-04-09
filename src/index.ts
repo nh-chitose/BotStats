@@ -1,4 +1,4 @@
-import { GatewayIntentBits, Client, ActivityType } from "discord.js";
+import { PermissionFlagsBits, GatewayIntentBits, Client, ActivityType } from "discord.js";
 import "dotenv/config";
 
 const client = new Client({
@@ -14,7 +14,7 @@ const client = new Client({
 const stopButton = String.fromCharCode(9209);
 
 client.once("ready", () => {
-  console.log("Bot準備完了～");
+  console.log("Bot is ready as " + client.user.username);
   console.log(client.guilds.cache.map(a => a.name));
 });
 
@@ -26,34 +26,51 @@ client.on("ready", () => {
 
 client.on("voiceStateUpdate", async (oldState, newState) => {
   console.log(newState.member.displayName);
+
+  // flags
   let flag = 0;
-  if(newState.guild.members.me.permissions.has("ManageNicknames") && newState.guild.members.me.permissions.has("ManageChannels")){
+  // have permission?
+  if(newState.guild.members.me.permissions.has(PermissionFlagsBits.ManageNicknames) && newState.guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)){
     console.log("Permission: OK");
     flag++;
   }else{
     console.log("Permission: Error");
   }
+  // have higher role?
+  if(newState.guild.roles.comparePositions(newState.guild.members.me.roles.highest, newState.member.roles.highest) > 0){
+    console.log("Role position: OK");
+    flag++;
+  }else{
+    console.log("Role position: Error");
+  }
+  // is bot?
+  if(newState.member.user.bot || oldState.member.user.bot){
+    console.log("Is bot?: yes");
+    flag++;
+  }else{
+    console.log("Is bot?: no");
+  }
 
-  if(flag === 1){
+  if(flag === 3){
+    // When bot enters voice channel
     if(oldState.channelId === null && newState.channelId !== null){
-      console.log("入室検知");
-      if(newState.member.user.bot){
-        let newDisplayName = newState.member.displayName.replace("🈳", "🈵");
-        newDisplayName = newDisplayName.replace(stopButton, "▶");
-        try{
-          await newState.member.setNickname(newDisplayName);
-          if(newState.channel.userLimit === 2){
-            await newState.channel.setUserLimit(3);
-          }
-        } catch(e){
-          console.log(e);
+      console.log("Detected bot entry to voice channel.");
+      let newDisplayName = newState.member.displayName.replace("🈳", "🈵");
+      newDisplayName = newDisplayName.replace(stopButton, "▶");
+      try{
+        await newState.member.setNickname(newDisplayName);
+        if(newState.channel.userLimit === 2){
+          await newState.channel.setUserLimit(3);
         }
+      } catch(e){
+        console.log(e);
       }
     }
 
+    // When bot leaves voice channel.
     else if(oldState.channelId !== null && newState.channelId === null){
-      console.log("退室検知");
-      if(oldState.member.user.bot && (oldState.member.displayName.includes("🈵") || oldState.member.displayName.includes("▶"))){
+      console.log("Detected bot leave from voice channel.");
+      if(oldState.member.displayName.includes("🈵") || oldState.member.displayName.includes("▶")){
         try{
           let newDisplayName = oldState.member.displayName.replace("🈵", "🈳");
           newDisplayName = newDisplayName.replace("▶", stopButton);
@@ -68,22 +85,22 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
       }
     }
 
-    else if(oldState.channelId !== null && newState.channelId !== null){
-      console.log("Voice State Updated.");
-      if(newState.member.user.bot){
-        try{
-          if(newState.channel.userLimit === 2){
-            await newState.channel.setUserLimit(3);
-          }
-          else if(oldState.channel.userLimit === 3 && !oldState.channel.name.includes("3") && !oldState.channel.name.includes("３")){
-            await oldState.channel.setUserLimit(2);
-          }
-        } catch(e){
-          console.log(e);
+    // When bot moves voice channel
+    else if(oldState.channelId !== newState.channelId){
+      console.log("Detected bot moved.");
+      try{
+        if(newState.channel.userLimit === 2){
+          await newState.channel.setUserLimit(3);
         }
+        else if(oldState.channel.userLimit === 3 && !oldState.channel.name.includes("3") && !oldState.channel.name.includes("３")){
+          await oldState.channel.setUserLimit(2);
+        }
+      } catch(e){
+        console.log(e);
       }
     }
   }
 });
+
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 client.login(process.env.TOKEN);
