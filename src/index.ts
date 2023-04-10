@@ -50,7 +50,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
   if(flag === 3){
     // When bot enters voice channel
-    if(oldState.channelId === null && newState.channelId !== null){
+    if(!oldState.channelId && newState.channelId){
       console.log("Detected bot entry to voice channel.");
       const newDisplayName = newState.member.displayName.replace("🈳", "🈵").replace(stopButton, "▶");
       try{
@@ -64,7 +64,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     }
 
     // When bot leaves voice channel
-    else if(oldState.channelId !== null && newState.channelId === null){
+    else if(oldState.channelId && !newState.channelId){
       console.log("Detected bot leave from voice channel.");
       if(oldState.member.displayName.includes("🈵") || oldState.member.displayName.includes("▶")){
         try{
