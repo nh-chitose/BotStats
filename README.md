@@ -1,6 +1,8 @@
 # BotStats
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/nh-chitose/botstats)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/nh-chitose/botstats/discord.js)
 ![GitHub](https://img.shields.io/github/license/nh-chitose/botstats)
+
 音楽、読上げボットの使用状態がニックネームでわかるDiscordボットです。
 
 ## 機能1: ニックネームの自動変更
