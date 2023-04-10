@@ -1,6 +1,7 @@
 # BotStats
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/nh-chitose/botstats)
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/nh-chitose/botstats/discord.js)
+[![CodeQL](https://github.com/nh-chitose/BotStats/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/nh-chitose/BotStats/actions/workflows/codeql-analysis.yml)
 ![GitHub](https://img.shields.io/github/license/nh-chitose/botstats)
 
 音楽、読上げボットの使用状態がニックネームでわかるDiscordボットです。
