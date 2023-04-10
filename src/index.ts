@@ -98,4 +98,4 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-client.login(process.env.TOKEN).catch(e)=>{console.log(e)};
+client.login(process.env.TOKEN).catch(e => console.log(e));
