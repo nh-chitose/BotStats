@@ -119,7 +119,7 @@ jobs:
        run: npm test
  
      - name: Test to load scripts to Node.js
-       run: node util/exec -r ./util/testLoad -e 'process.exit()'
+       run: node ./dist -e 'process.exit()'
 
   success-all-test:
     runs-on: ubuntu-latest
