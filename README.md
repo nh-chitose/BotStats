@@ -32,3 +32,8 @@ npm run start
 # サポート
 [サポートサーバ](https://discord.gg/CAP6JJPdaE)にて質問・バグの報告などを受け付けております。
 またご自分でホストしなくても、上記サーバーから導入して頂けます。
+
+# Change Log
+2022/03/04 Release v1.0.0
+2022/09/24 Update v1.1.0
+2023/04/09 TypeScriptに移行 v2.0.0
