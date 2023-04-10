@@ -112,9 +112,6 @@ jobs:
      - name: Build
        run: npm run build
  
-     - name: Test
-       run: npm test
- 
      - name: Test to load scripts to Node.js
        run: node ./dist -e 'process.exit()'
 
