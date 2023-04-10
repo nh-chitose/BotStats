@@ -4,7 +4,6 @@ import "dotenv/config";
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildVoiceStates,
   ],
   ws: { properties: { browser: "Discord iOS" } },
@@ -25,7 +24,7 @@ client.on("ready", () => {
 client.on("voiceStateUpdate", async (oldState, newState) => {
   console.log(newState.member.displayName);
 
-  // flags
+  // flags to changeNick
   let flag = 0;
   // have permission?
   if(newState.guild.members.me.permissions.has(PermissionFlagsBits.ManageNicknames) && newState.guild.members.me.permissions.has(PermissionFlagsBits.ManageChannels)){
@@ -51,7 +50,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
 
   if(flag === 3){
     // When bot enters voice channel
-    if(oldState.channelId === null && newState.channelId !== null){
+    if(!oldState.channelId && newState.channelId){
       console.log("Detected bot entry to voice channel.");
       const newDisplayName = newState.member.displayName.replace("🈳", "🈵").replace(stopButton, "▶");
       try{
@@ -65,14 +64,14 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     }
 
     // When bot leaves voice channel
-    else if(oldState.channelId !== null && newState.channelId === null){
+    else if(oldState.channelId && !newState.channelId){
       console.log("Detected bot leave from voice channel.");
       if(oldState.member.displayName.includes("🈵") || oldState.member.displayName.includes("▶")){
         try{
           const newDisplayName = oldState.member.displayName.replace("🈵", "🈳").replace("▶", stopButton);
           await newState.member.setNickname(newDisplayName);
 
-          if(oldState.channel.userLimit === 3 && (!oldState.channel.name.includes("3") || !oldState.channel.name.includes("３"))){
+          if(oldState.channel.userLimit === 3 && !oldState.channel.name.includes("3") && !oldState.channel.name.includes("３")){
             await oldState.channel.setUserLimit(2);
           }
         } catch(e){
@@ -88,7 +87,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if(newState.channel.userLimit === 2){
           await newState.channel.setUserLimit(3);
         }
-        else if(oldState.channel.userLimit === 3 && (!oldState.channel.name.includes("3") || !oldState.channel.name.includes("３"))){
+        if(oldState.channel.userLimit === 3 && !oldState.channel.name.includes("3") && !oldState.channel.name.includes("３")){
           await oldState.channel.setUserLimit(2);
         }
       } catch(e){
