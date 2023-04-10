@@ -25,7 +25,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-named-import-spacing": "^1.0.3",
     "eslint-plugin-node": "^11.1.0",
-    "rimraf": "^4.4.1",
+    "rimraf": "^5.0.0",
     "typescript": "^5.0.3"
   }
 }
