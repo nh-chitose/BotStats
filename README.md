@@ -29,7 +29,7 @@ cd BotStats
 npm i
 ```
 `.env`ファイルの用意
-```: .env
+```
 TOKEN=(Discord Developer Portalで取得したトークン)
 ```
 ```sh
