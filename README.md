@@ -7,6 +7,7 @@
 
 ## 機能2: 
 * 2人制限のVCをBOTの入室と同時に3人部屋にし、退出時に2人部屋に戻す。
+
 例外: VCのチャンネル名に「3」(半角)か「３」(全角)が入る場合には3人制限を維持する
 
 ## 必要な権限
@@ -26,6 +27,12 @@ git clone https://github.com/nh-chitose/BotStats.git
 cd BotStats
 # 依存関係のインストール
 npm i
+```
+`.env`ファイルの用意
+```: .env
+TOKEN=(Discord Developer Portalで取得したトークン)
+```
+```sh
 # 実行
 npm run start
 ```
