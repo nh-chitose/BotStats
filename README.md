@@ -53,7 +53,7 @@ npm run start
 # Change Log
 2022/03/04 Release v1.0.0
 
-2022/09/24 Update v1.1.0
+2022/09/24 機能2の追加 v1.1.0
 
 2023/04/09 TypeScriptに移行 v2.0.0
 
