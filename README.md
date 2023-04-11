@@ -1,4 +1,4 @@
-# BotStats
+# :robot: BotStats
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/nh-chitose/botstats)
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/nh-chitose/botstats/discord.js)
 [![CodeQL](https://github.com/nh-chitose/BotStats/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/nh-chitose/BotStats/actions/workflows/github-code-scanning/codeql)
