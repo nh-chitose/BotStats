@@ -1,4 +1,4 @@
-# BotStats
+# :robot: BotStats
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/nh-chitose/botstats)
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/nh-chitose/botstats/discord.js)
@@ -24,6 +24,8 @@
 ☑ ニックネームの管理
 
 ☑ チャンネルの管理
+
+* ニックネームを変更したいボットよりBotStatsのロールが上であることが必要です。
 
 ## 推奨環境
 
@@ -61,7 +63,7 @@ npm run start
 
 2022/03/04 Release v1.0.0
 
-2022/09/24 Update v1.1.0
+2022/09/24 機能2の追加 v1.1.0
 
 2023/04/09 TypeScriptに移行 v2.0.0
 
